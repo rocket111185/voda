@@ -1,0 +1,23 @@
+{
+  "name": "voda",
+  "version": "0.0.1",
+  "description": "The lightweight testing library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rocket111185/voda.git"
+  },
+  "keywords": [
+    "unittest",
+    "testing"
+  ],
+  "author": "Dmytro Rekechynsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rocket111185/voda/issues"
+  },
+  "homepage": "https://github.com/rocket111185/voda#readme"
+}

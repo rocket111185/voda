@@ -92,19 +92,19 @@ const throws = (actError, expError) => {
  * - returns (comparing the actual and expected results)
  *
  * If you need just to make sure the test does not
- * throw an exception, you can not to call `returns`.
+ * throw an error, you can not to call `returns`.
  */
 
 const passes = (testName, testable) => {
   try {
     console.log(`\n${testLabel} ${testName}`);
     const result = testable();
-    console.log(passLabel, 'The test does not cause an exception.');
+    console.log(passLabel, 'The test does not cause an error.');
     return {
       returns: (expected) => returns(result, expected)
     };
   } catch (e) {
-    console.log(failLabel, 'The test threw the exception:\n', e);
+    console.log(failLabel, 'The test threw the error:\n', e);
     return { returns: () => {} };
   }
 };
@@ -117,17 +117,17 @@ const passes = (testName, testable) => {
  * - throws (comparing the actual and expected errors)
  *
  * If you need just to make sure the test
- * throws an exception, you can not to call `throws`.
+ * throws an error, you can not to call `throws`.
  */
 
 const fails = (testName, testable) => {
   try {
     console.log(`\n${testLabel} ${testName}`);
     testable();
-    console.log(failLabel, 'The test did not cause an exception.');
+    console.log(failLabel, 'The test did not cause an error.');
     return { throws: () => {} };
   } catch (e) {
-    console.log(passLabel, 'The test threw an exception.');
+    console.log(passLabel, 'The test threw an error.');
     return {
       throws: (expected) => throws(e, expected)
     };
@@ -149,4 +149,4 @@ const test = (testName) => ({
   fails: (testable) => fails(testName, testable)
 });
 
-module.exports({ test });
+module.exports = { test };

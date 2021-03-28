@@ -90,7 +90,7 @@ The output is just what we need:
 |PASS| Result equals to expected.
 ```
 
-The comparison if based on `deepStrictEqual` from the
+The comparison is based on `deepStrictEqual` from the
 standard module `assert`, so you can check even the matrices.
 
 But what if we compare two objects?
@@ -151,7 +151,7 @@ OK, now we know how to check the result.
 
 But how to check an error?
 
-### fails
+## fails
 
 `fails` has one argument, and this is a callback
 with no arguments.

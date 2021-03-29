@@ -21,6 +21,9 @@ const failLabel = '\x1b[1m\x1b[30m\x1b[41m FAIL \x1b[0m';
 // Quick toString with blackjack and hookers.
 const toStr = (value) => JSON.stringify(value);
 
+// Quick typeOf with... you know)
+const typeOf = (value) => ((Array.isArray(value)) ? 'array' : typeof value);
+
 /**
  * `compareObjects`... compares objects.
  * Only keys of `expected` are included for checking.
@@ -28,6 +31,12 @@ const toStr = (value) => JSON.stringify(value);
 
 const compareObjects = (actual, expected) => {
   const checkedKeys = Object.keys(expected);
+  if (!checkedKeys.length) {
+    const actKeysLen = Object.keys(actual).length;
+    deepStrictEqual(actKeysLen, 0,
+      `expected to have no keys, but got ${actKeysLen}`);
+    return;
+  }
   for (const key of checkedKeys) {
     if (actual[key] === undefined)
       throw new Error(`the actual object does not contain the key "${key}"`);
@@ -46,13 +55,12 @@ const compareObjects = (actual, expected) => {
  */
 
 const returns = (actValue, expValue) => {
-  const aType = typeof actValue;
-  const eType = typeof expValue;
-  const areArrays = Array.isArray(actValue) && Array.isArray(expValue);
+  const aType = typeOf(actValue);
+  const eType = typeOf(expValue);
   try {
     if (aType !== eType)
       throw new Error(`type of actual: ${aType}, expected: ${eType}`);
-    if (aType === 'object' && !areArrays) {
+    if (aType === 'object') {
       compareObjects(actValue, expValue);
     } else {
       deepStrictEqual(actValue, expValue,
@@ -73,7 +81,7 @@ const returns = (actValue, expValue) => {
 
 const throws = (actError, expError) => {
   try {
-    if (typeof expError !== 'object' || Array.isArray(expError)) {
+    if (typeOf(expError) !== 'object') {
       throw new Error('Expected error is not an object...');
     }
     compareObjects(actError, expError);

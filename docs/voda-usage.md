@@ -119,8 +119,14 @@ That's because only the keys of expected object are taken
 for the comparison. So we can describe only the part of object
 in order to check the result.
 
+But if the expected object has no keys, the actual must have
+no keys, too.
+
 Also in order to have the `returns` test passed, the actual
 and expected value should have the same type.
+You may consider the array and object to have the same type
+'object' (because the `typeof` works so), but `voda` has own
+function `typeOf`. It returns 'array' if the value is array.
 
 ### Some tricks
 
@@ -145,6 +151,20 @@ test('several sum calls')
     return res;
   })
   .returns([6, 7, 8, 7, 6]);
+
+test('named sum results')
+  .passes(() => {
+    const res = {};
+    res.one = sum(0, -1, 2);
+    res.two = sum(1, 1, 0);
+    res.six = sum(1, 2, 3);
+    return res;
+  })
+  .returns({
+    one: 1,
+    two: 2,
+    six: 6
+  });
 ```
 
 OK, now we know how to check the result.

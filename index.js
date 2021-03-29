@@ -7,6 +7,12 @@
  * (c) 2021
  */
 
+// TODO:
+// * asyncTest(), which has the same interface as test()
+// * satisfies() (method of test().passed() object),
+//   which checks the result with passed predicate (function,
+//   which takes one argument and returns the boolean)
+
 
 
 // Import comparing function from standard Node.JS module
@@ -43,8 +49,7 @@ const compareObjects = (actual, expected) => {
     const aVal = actual[key];
     const eVal = expected[key];
     deepStrictEqual(aVal, eVal,
-      `actual.${key}: ${toStr(aVal)}, ` +
-      `expected.${key}: ${toStr(eVal)}`);
+      `actual.${key}: ${toStr(aVal)}, expected.${key}: ${toStr(eVal)}`);
   }
 };
 
@@ -63,9 +68,7 @@ const returns = (actValue, expValue) => {
     if (aType === 'object') {
       compareObjects(actValue, expValue);
     } else {
-      deepStrictEqual(actValue, expValue,
-        `actual: ${toStr(actValue)}, ` +
-        `expected: ${toStr(expValue)}`);
+      deepStrictEqual(actValue, expValue);
     }
     console.log(passLabel, 'Result equals to expected.');
   } catch (e) {

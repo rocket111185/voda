@@ -2,6 +2,8 @@
 
 const { test } = require('../index.js');
 
+test('No output, because no method is called');
+
 test('Named results')
   .passes(() => {
     const res = {};
@@ -16,6 +18,18 @@ test('Named results')
     six: 6
   });
 
+test('Return 5, expect 5')
+  .passes(() => 5)
+  .returns(5);
+
+test('Return "5", expect 5')
+  .passes(() => '5')
+  .returns(5);
+
+test('Return 5, expect "5"')
+  .passes(() => 5)
+  .returns('5');
+
 test('Throw error to `passes`')
   .passes(() => {
     throw new Error('works as it should be');
@@ -24,22 +38,12 @@ test('Throw error to `passes`')
 test('No error inside `fails`')
   .fails(() => {});
 
-test('Return array, expect object')
-  .passes(() => [])
-  .returns({});
-
-test('Return object, expect array')
-  .passes(() => ({}))
-  .returns([]);
-
-test('Return object with no keys, expect object with no keys')
-  .passes(() => ({}))
-  .returns({});
-
-test('No output, because no method is called');
-
-test('Passed array as asserted error')
+test('Passed array as expected error')
   .fails(() => {
     throw new Error('works as it should be');
   })
   .throws([]);
+
+test('Return "lola", expect "lol"')
+  .passes(() => 'lola')
+  .returns('lol');

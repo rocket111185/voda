@@ -19,7 +19,7 @@ of tests.
 ## Origin of name
 
 The most popular frameworks for unittesting in Node.JS
-are `chai` (can be read as "Tea" in Russian)
+are `chai` (can be read as "Tea" in Ukrainian)
 and `mocha` (the drink, too).
 
 Instead of providing lots of flavours and feeling, this
